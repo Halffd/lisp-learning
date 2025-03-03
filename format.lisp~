@@ -1,0 +1,7 @@
+;; Example usage of Common Lisp format directives
+(format t "~:@(int case example~)~%")              ; Capitalize each word
+(format t "Number with commas ~:D~%" 100000000)    ; Insert commas
+(format t "PI to 5 characters ~5F~%" 3.141593)    ; Width of 5 characters
+(format t "PI to 4 decimals ~,4F~%" 3.141593)     ; 4 decimal places
+(format t "10 Percent ~,,2F~%" 0.10)              ; Scale factor 100 (10^2)
+(format t "10 Dollars ~$~%" 10)                    ; Monetary format

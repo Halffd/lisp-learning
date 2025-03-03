@@ -1,0 +1,9 @@
+(define foo (lambda () (display "foo!\n")))
+(define bar (lambda () (display "bar!\n")))
+(if #f (foo) (bar))
+(defun nd (&rest args)
+  (cond
+   ((null args) t)
+   ((null (car args)) nil)
+   (t (apply #'nd (cdr args)))))
+(nd 1 1)
