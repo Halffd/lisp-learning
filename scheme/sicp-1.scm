@@ -109,15 +109,16 @@
   (average guess (/ x guess)))
 
 (define (average x y)
-  (/ (+ x y) 2))
+  (/ (+ x y) 2))x
 
 (define (sqrt x)
   (sqrt-iter 1.0 x))
 (display "Exercise 1.7 ")
 (sqrt 123456789012345) ; = 11111111.061111081 - Error: 0.015625
 (sqrt 0.00000000123456)
-
+(good-enough? 4 2)
 ; (sqrt 123456789012345)
+(sqrt 4)
 (define (new-if predicate then-clause else-clause)
   (cond (predicate then-clause)
         (else else-clause)))
@@ -266,3 +267,27 @@
 (display "(cube-root ") (display x) (display ") -> ") (display cube-root-x)
 (newline)
 (display "(cube ") (display cube-root-x) (display ") -> ") (display (cube cube-root-x))
+(define (square x) (* x x))
+
+(define (square x) 
+  (display (log x))
+  (exp (double (log x))))
+
+(define (double x) (+ x x))
+(square 2)
+(square 9)
+(square 0)
+(square -2)
+(define (sqrt x)
+  (define (square n) (* n n))
+  (define (good-enough? guess)
+    (< (abs (- (square guess) x)) 0.001))
+  (define (improve guess)
+    (average guess (/ x guess)))
+  (define (sqrt-iter guess)
+    (if (good-enough? guess)
+        guess
+        (sqrt-iter (improve guess))))
+  (sqrt-iter 1.0))
+(sqrt 81)
+(sqrt 100)
