@@ -1,8 +1,9 @@
-(define (factorial n)
+#lang scheme
+(define (factorial0 n)
   (if (= n 1)
       1
       (* n (factorial (- n 1)))))
-(factorial 8)
+(factorial0 6)
 
 
 (define (factorial n)
@@ -14,7 +15,7 @@
                  (+ counter 1)
                  max-count)))
 (factorial 40)
-(define (factorial n)
+(define (factorial2 n)
   (define (iter product counter)
     (if (> counter n)
         product
@@ -175,7 +176,7 @@
 (pascal 8 -2)
 (pascal (pasccal 10 5) (pascal 50 25))
 (define (cube x) (* x x x))
-(define (p x) (- (* 3 x) (* 4 (cube x))))
+(define (p0 x) (- (* 3 x) (* 4 (cube x))))
 (define (sine angle)
    (if (not (> (abs angle) 0.1))
        angle
@@ -222,7 +223,7 @@
     (cond ((= x 0) y)
       (t (helper (1- x) (1+ y)))))
   (id-iterative n 0))
-(define (fib n)
+(define (fib2 n)
   (let loop ((n n) (a 0) (b 1))
     (if (zero? n)
         a
@@ -298,7 +299,31 @@
 (divides? 4 4)
 (smallest-divisor 37)
 (find-divisor 253 88)
-(define (prime? n)
+(define (prime? n..)
   (= n (smallest-divisor n)))
 (prime? 4)
 
+(define (expmod base exp m)
+  (cond ((= exp 0) 1)
+        ((even? exp)
+         (remainder (square (expmod base (/ exp 2) m))
+                    m))
+        (else
+         (remainder (* base (expmod base (- exp 1) m))
+                    m))))
+(random 5)
+(define (fermat-test n)
+  (define (try-it a)         
+    (= (expmod a n n) a))
+  (try-it (+ 1 (random (- n 1)))))
+
+(fermat-test 37)
+
+(define (fast-prime? n times)
+  (cond ((= times 0) true)
+        ((fermat-test n) (fast-prime? n (- times 1)))
+        (else false)))
+(fast-prime? 377777777 100)
+(fast-prime? 561 1)
+(fast-prime? 6601 1999)
+(remainder -2147483648 -1)

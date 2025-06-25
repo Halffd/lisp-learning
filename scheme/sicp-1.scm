@@ -1,3 +1,4 @@
+
 (define size 2)
 (* 4 size)
 (define (square x) (* x x))
